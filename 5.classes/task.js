@@ -1,30 +1,28 @@
 class PrintEditionItem {
-    state = 100;
-    type = null;
-
     constructor(name, releaseDate, pagesCount) {
+        this._state = 100;
+        this.type = null;
         this.name = name;
         this.releaseDate = releaseDate;
         this.pagesCount = pagesCount;
     }
 
     get state() {
-        return this.state;
+        return this._state;
     }
 
     set state(state) {
-        this.state = state
+        if (state < 0) {
+            this._state = 0;
+        } else if (state > 100) {
+            this._state = 100;
+        } else {
+            this._state = state;
+        }
     }
 
     fix() {
-        let newState = this.state * 1.5;
-        if (newState < 0) {
-            this.state = 0;
-        } else if (newState > 100) {
-            this.state = 100;
-        } else {
-            this.state = newState;
-        }
+        this.state = this._state * 1.5;
     }
 }
 
